@@ -1,0 +1,17 @@
+FROM debian:buster-slim
+
+ENV DEBIAN_FRONTEND noninteractive
+
+WORKDIR "/root"
+RUN apt-get update && apt-get install -y nano \
+    apt-utils \    
+    xz-utils \ 
+    openssh-server \
+    apache2 \
+    supervisor;
+
+RUN chown -R www-data:www-data /var/www/html && chmod -R g+s /var/www/html;\
+  chmod -R 777 /var/www/html; 
+
+EXPOSE 80
+ENTRYPOINT ["/usr/bin/supervisord"]

@@ -1,0 +1,10 @@
+    xavierl_devenv:        
+        build: ./docker/build/
+        ports:
+            - 80:80      
+        volumes:      
+        - ./src:/var/www/html  
+        container_name: xavierl_devenv
+
+
+

@@ -1,0 +1,15 @@
+npm install --save-dev webpack@latest webpack-dev-server@latest
+
+package.json
+
+rembash
+touch webpack.config.js
+
+https://webpack.js.org/guides/getting-started/
+
+ls
+
+###############################################
+sous root
+
+

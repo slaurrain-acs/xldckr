@@ -1,0 +1,8 @@
+git init
+git add --all
+git commit -m "Initialisation"
+git config --global user.name "lor1cd"
+git config --global user.email "laurrains@gmail.com"
+git remote add origin https://lor1cd@bitbucket.org/lor1cd/milin.git
+git push -u origin master
+
