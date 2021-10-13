@@ -1,10 +1,17 @@
-FROM debian:latest
+FROM debian:bullseye-slim
 #
 #
 #
 ENV DEBIAN_FRONTEND=noninteractive 
 # Install packages
-RUN apt-get update && apt-get -y install openssh-server sudo
+RUN apt-get update && apt-get -y install openssh-server sudo \
+    nano \
+    apt-utils \    
+    xz-utils \ 
+    apache2;
+  #  supervisor;
+
+
 ADD install/set_root_pw.sh /set_root_pw.sh
 ADD install/run.sh /run.sh
 RUN chmod +x /*.sh
@@ -24,5 +31,5 @@ RUN useradd docker \
         && addgroup docker sudo \
         && true
 
-EXPOSE 22
+EXPOSE 22 80
 CMD ["/run.sh"]

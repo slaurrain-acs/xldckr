@@ -2,6 +2,7 @@
         build: ./docker/build/
         ports:
             - "2222:22"
+            - "80:80"
         environment:
             - SSH_KEY="$$(cat ~/.ssh/id_rsa.pub)"
         container_name: xavierl_devenv_ctn

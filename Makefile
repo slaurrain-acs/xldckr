@@ -4,7 +4,7 @@ PROJECT=debian-ssh
 CONTAINER_NAME=xavierl_devenv_ctn
 IMAGE_NAME=xavierl_devenv_img::
 DOCKER_USER=docker
-REMOTE_ROOT="-w '/root'"
+REMOTE_ROOT=-w '/root'
 
 listctn: 
 	docker container ls
