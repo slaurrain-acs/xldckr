@@ -1,17 +1,23 @@
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 ENV DEBIAN_FRONTEND noninteractive
-
+ENV LSB_RELEASE=bullseye
 WORKDIR "/root"
 RUN apt-get update && apt-get install -y nano \
     apt-utils \    
     xz-utils \ 
-    openssh-server \
     apache2 \
+    openssh-server \
     supervisor;
+#apt install net-tools lsof
+COPY /conf/supervisord.conf /etc/supervisor/conf.d
 
-RUN chown -R www-data:www-data /var/www/html && chmod -R g+s /var/www/html;\
+#droits 
+
+RUN mkdir /root/tmp; \
+  apt-get clean; \
+  chown -R www-data:www-data /var/www/html && chmod -R g+s /var/www/html;\
   chmod -R 777 /var/www/html; 
 
-EXPOSE 80
+EXPOSE 80 2222
 ENTRYPOINT ["/usr/bin/supervisord"]

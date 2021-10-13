@@ -1,0 +1,29 @@
+{
+    // Utilisez IntelliSense pour en savoir plus sur les attributs possibles.
+    // Pointez pour afficher la description des attributs existants.
+    // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "1.13.0",
+    "configurations": [
+
+        
+        {
+            "name": "Listen for my dick",
+            "type": "php",
+            "request": "launch",
+            "log":false,
+            "port": 9000,
+            "stopOnEntry": false,
+            "pathMappings": {
+                "/var/www/html": "${workspaceRoot}/src"
+                }
+        },
+        {
+            "name": "Launch currently open script",
+            "type": "php",
+            "request": "launch",
+            "program": "${file}",
+            "cwd": "${fileDirname}",
+            "port": 9000
+        }
+    ]
+}

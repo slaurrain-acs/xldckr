@@ -1,0 +1,13 @@
+    xavierl_devenv:        
+        build: ./docker/build/
+        ports:
+            - 2222:22   
+        volumes:      
+        - ./src:/var/www/html
+        - ./docker/build/conf:/root/conf
+        # - ./docker/build/conf/ssh_config:/etc/ssh/ssh_config
+        #- ./docker/build/conf/sshd_config:/etc/ssh/sshd_config
+        container_name: xavierl_devenv
+
+
+

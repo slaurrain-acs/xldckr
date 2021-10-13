@@ -1,0 +1,2 @@
+log/*.log
+docker/build/install/node-v14.17.3-linux-x64.tar.xz
