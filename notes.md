@@ -1,6 +1,7 @@
-## up
+## launch
 
-ici avec run
+make
+make upd
 
 
 ## test ssh service

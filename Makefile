@@ -1,4 +1,4 @@
-all: upd
+all: build
 
 PROJECT=debian-ssh
 CONTAINER_NAME=xavierl_devenv_ctn
@@ -46,6 +46,9 @@ erase: stopall
 	docker container rm $(CONTAINER_NAME) && docker image rm $$(docker images '*$(CONTAINER_NAME)*')
 #
 # launch
+build:
+	docker-compose build
+
 up:
 	docker-compose up
 upd: 

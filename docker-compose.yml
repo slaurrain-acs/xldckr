@@ -5,6 +5,8 @@
             - "80:80"
         environment:
             - SSH_KEY="$$(cat ~/.ssh/id_rsa.pub)"
+        volumes:
+            - ./src:/var/www/html
         container_name: xavierl_devenv_ctn
 
 
