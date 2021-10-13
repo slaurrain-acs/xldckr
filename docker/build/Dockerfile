@@ -1,22 +1,28 @@
-FROM debian:bullseye-slim
+FROM debian:latest
+#
+#
+#
+ENV DEBIAN_FRONTEND=noninteractive 
+# Install packages
+RUN apt-get update && apt-get -y install openssh-server sudo
+ADD install/set_root_pw.sh /set_root_pw.sh
+ADD install/run.sh /run.sh
+RUN chmod +x /*.sh
+RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config \
+  && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+  && touch /root/.Xauthority \
+  && true
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV LSB_RELEASE=bullseye
-WORKDIR "/root"
-RUN apt-get update && apt-get install -y nano \
-    apt-utils \    
-    xz-utils \ 
-    apache2 \
-    supervisor;
+## Set a default user. Available via runtime flag `--user docker`
+## Add user to 'staff' group, granting them write privileges to /usr/local/lib/R/site.library
+## User should also have & own a home directory, but also be able to sudo
+RUN useradd docker \
+        && passwd -d docker \
+        && mkdir /home/docker \
+        && chown docker:docker /home/docker \
+        && addgroup docker staff \
+        && addgroup docker sudo \
+        && true
 
-COPY /conf/supervisord.conf /etc/supervisor/conf.d
-
-#droits 
-
-RUN mkdir /root/tmp; \
-  apt-get clean; \
-  chown -R www-data:www-data /var/www/html && chmod -R g+s /var/www/html;\
-  chmod -R 777 /var/www/html; 
-
-EXPOSE 80
-ENTRYPOINT ["/usr/bin/supervisord"]
+EXPOSE 22
+CMD ["/run.sh"]
