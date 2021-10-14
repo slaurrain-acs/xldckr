@@ -2,7 +2,7 @@ all: build
 
 PROJECT=debian-ssh
 CONTAINER_NAME=xavierl_devenv_ctn
-IMAGE_NAME=xavierl_devenv_img::
+IMAGE_NAME=xavierl_devenv_img
 DOCKER_USER=docker
 REMOTE_ROOT=-w '/root'
 
@@ -54,5 +54,13 @@ up:
 upd: 
 	docker-compose up -d
 
+setpsswd:
+	docker exec  $(REMOTE_ROOT)  $(CONTAINER_NAME) passwd docker
+
+buildraw:
+	docker build -t $(CONTAINER_NAME) ./docker/build
+
+debug-ssh: buildraw .FORCE
+	docker run -p 2222:22 -e SSH_KEY="$$(cat ~/.ssh/id_rsa.pub)" $(CONTAINER_NAME)
 
 .FORCE:
